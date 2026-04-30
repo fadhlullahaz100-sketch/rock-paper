@@ -1,0 +1,2970 @@
+
+    
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Slider</title>
+<link rel="stylesheet" href="../1st/assets/stylesheet/travelsandtours.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+/*very importantttttttttttttttttttttttttttttttttttt
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>*/
+
+.hero{
+    position:relative;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* SLIDES */
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+    opacity:0;
+    transition:opacity 1s ease-in-out;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+/* OVERLAY */
+.slide::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+}
+
+/* MAIN TEXT */
+.text{
+    position:absolute;
+    bottom:45%;
+    left:10%;
+    color:white;
+    font-size:40px;
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 1s ease;
+}
+
+.text.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* TYPEWRITER */
+.typewriter{
+    position:absolute;
+    bottom:35%;
+    left:10%;
+    color:white;
+    font-size:22px;
+    border-right:3px solid white;
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+/* GLASS BUTTON */
+.nav-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    border:none;
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(8px);
+    transition-duration: 0.8s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.nav-btn:hover{
+    transition-duration: 0.2s;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    padding: 28px 28px;
+    border-radius:50%;
+    border:none;
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+
+    background:rgba(255,255,255,0.35);
+    backdrop-filter:blur(8px);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.prev{ left:20px; }
+.next{ right:20px; }
+
+/* DOTS */
+.dots{
+    position:absolute;
+    bottom:20px;
+    width:100%;
+    text-align:center;
+}
+
+.dot{
+    display:inline-block;
+    width:10px;
+    height:10px;
+    margin:5px;
+    background:rgba(255,255,255,0.5);
+    border-radius:50%;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.fixed-text{
+    position:fixed;
+    color:white;
+    width: 100%;
+    z-index:100;
+}
+.fixed1{
+    position: absolute;
+    z-index: 10;
+    top: 65%;
+    left: 44%;
+    color: azure;
+}
+
+.fixed1aa{
+    position: absolute;
+    z-index: 20;
+    padding: 1.55rem;
+    left: -2.07%;
+    color: azure;
+
+}
+.fixed1a{
+    position: absolute;
+    z-index: 10;
+    top: 10.5%;
+    color: azure;
+    height: 35vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.upfixed1a{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    border-radius: 8px;
+     height: 21vh;
+     width: 84vw;
+      border:2px solid rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(5px);
+}
+
+.fixed2{
+    position: absolute;
+    z-index: 10;
+    top: 76.8%;
+    left: 0%;
+    color: azure;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+}
+.fill-btn{
+    background-color: white;
+    position:relative;
+    padding:12px 30px;
+    color:white;
+    border:2px solid white;
+    background:transparent;
+    cursor:pointer;
+    overflow:hidden;
+    font-size:16px;
+    z-index:1;
+    border-radius:30px;
+    overflow: hidden;
+    min-height: 50%;
+    
+}
+
+/* BACKGROUND FILL (BOTTOM → TOP) */
+.fill-btn::before{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:0%;
+    background: white;
+    transition:height 0.4s ease;
+    z-index:-1;
+    border-radius:30px;
+    overflow: hidden;
+}
+
+/* HOVER EFFECT */
+.fill-btn:hover::before{
+    height:100%;
+    min-height: 50%;
+    border-radius:30px;
+    overflow: hidden;
+    
+}
+
+.fill-btn:hover{
+    
+    min-height: 50%;
+    color:black;
+    border-radius:30px;
+    overflow: hidden;
+}
+.dot.active{
+    background:white;
+    transform:scale(1.3);
+}
+.fixed1{
+    display: flex;
+}
+.booknow{
+    height: 6vh;
+    width: 27vw;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.booknow1{
+    padding:12px 40px;
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    color:white;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+.booknow1:hover{
+    background:rgba(255,255,255,0.3);
+    padding:12.1px 42px;
+}
+/* MOBILE */
+@media(max-width:768px){
+    .text{ font-size:24px; }
+    .typewriter{ font-size:16px; }
+}
+.bottomblur{
+    border-radius:10px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    color:white;
+    cursor:pointer;
+    transition:0.3s ease;
+    height: 14.7vh;
+    width: 85vw;
+    display: flex;
+    align-items: center;
+    margin-top: 3.3rem;
+    text-align: center;
+    justify-content: space-around;
+}
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0%;
+    height:2px;
+    background:white;
+    transition:0.3s ease;
+}
+.nav-links a{
+    margin-left:20px;
+    text-decoration:none;
+    color:white;
+    position:relative;
+}
+.btn{
+    position:relative;
+    padding:14px 40px;
+    font-size:16px;
+    color:white;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    overflow:hidden;
+
+    /* GRADIENT + GLASS FEEL */
+    background:linear-gradient(135deg,#4f46e5,#06b6d4);
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+
+    transition:0.3s ease;
+}
+
+/* HOVER LIFT */
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.4);
+}
+
+/* CLICK EFFECT */
+.btn:active{
+    transform:scale(0.96);
+}
+ .nav-blur {
+    position: absolute;
+    inset: 0;
+    background:rgba(255,255,255,0.2);
+    filter: blur(20px);
+    opacity: 0;
+    
+
+    mask-image: radial-gradient(circle 80px at 50% 50%, white 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle 120px at 50% 50%, white 0%, transparent 100%);
+
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+/* SHINE EFFECT */
+.btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+    transition:0.5s;
+}
+
+/* SHINE ON HOVER */
+.btn:hover::before{
+    left:100%;
+}
+.value{
+    color: black;
+}
+/* TEXT ABOVE EFFECT */
+.btn span{
+    position:relative;
+    z-index:2;
+}
+.travelinput{
+    padding:10px 30px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.3);
+    background: transparent;
+    color: rgba(255,255,255,0.9);
+
+    cursor:pointer;
+    transition:0.3s ease;
+}
+.nav-links a:hover::after{
+    width:100%;
+}
+.des{
+    text-align: left;
+}
+
+
+
+
+.date-input {
+
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: white;
+
+  /* Glass effect */
+  background: transparent;
+  transition: 0.3s;
+}
+
+.date-input::placeholder {
+  color:white;
+   
+  
+}
+.date-container {
+     padding:10px 30px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.3);
+
+}
+
+.date-input:focus {
+    
+  
+}
+
+/* Calendar icon */
+.calendar-icon {
+  /*transform: translateY(-50%);*/
+  font-size: 18px;
+  pointer-events: none;
+}
+
+/* Flatpickr style */
+.flatpickr-calendar {
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.flatpickr-day.selected {
+  background: #007bff;
+  border: none;
+}
+ 
+
+  .glass-blur {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+
+    /* DIFFERENT COLOR */
+    background:  rgba(255,255,255,0.4);
+    filter: blur(50px);
+    opacity: 0;
+
+    mask-image: radial-gradient(circle 100px at 50% 50%, white 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle 10000px at 20% 20%, white 0%, transparent 100%);
+
+    pointer-events: none;
+  }
+
+  .flightimage img{
+    height: 4.1rem;
+    width: 6rem;
+    filter: invert(0);
+    
+  }
+  .flightimage img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255,); /* white overlay */
+}
+.hotelimg img{
+     height: 4.2rem;
+    width: 4.4rem;
+
+}
+.goodflight{
+    text-decoration: none;
+    list-style-type: none;
+}
+li{
+    text-decoration: none;
+    list-style-type: none;
+
+}
+.flight{
+    color: whitesmoke;
+    opacity: 0.5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.father{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+/* NAV */
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+  width: 80vw;
+  padding: 30px 40px;
+  border-radius: 50px;
+}
+
+/* LINKS */
+.father nav a {
+  color: white;
+  opacity: 0.78;
+  text-decoration: none;
+  padding: 12px 20px;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  transition-duration: 0.1s;
+}
+.father nav a:hover{
+    transition-duration: 0.1s;
+    font-size: 0.89rem;
+    color: white;
+    opacity: 1;
+
+}
+.father nav a.active {
+  transform: translateY(12px);
+  color: white;
+  opacity: 1;
+}
+
+/* U-SHAPE */
+.indicator {
+  position: absolute;
+  top: -10.8px;
+  height: 60px;
+  background: rgba( 255, 255,255, 0.56);
+  border-radius: 0 0  80px 80px;
+  transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2;
+}
+
+/* ICON */
+.icon {
+  position: absolute;
+  top: -35px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  transition: all 0.35s ease;
+  z-index: 3;
+}
+.imgindic{
+    height: 20px;
+    width: 20px;
+}
+
+
+
+
+
+
+
+.gnav {
+    position: fixed;
+    width: 100%;
+  }
+
+  /* BLUR COLOR LAYER (moves with mouse) */
+  .gnav-blur {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.3);
+    filter: blur(40px);
+    opacity: 0;
+
+    mask-image: radial-gradient(circle 190px at 50% 50%, white 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle 190px at 50% 50%, white 0%, transparent 100%);
+
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  /* CONTENT ABOVE */
+  .gnav-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+ 
+
+  li {
+    color: white;
+    cursor: pointer;
+  }
+
+
+
+
+  .tabs {
+    display: flex;
+    gap: 10px;
+  }
+
+  .tab {
+    width: 5.7rem;
+    height: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px rgba(255, 255, 255, 0.3) solid;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 20;
+  }
+  
+
+  .tab.active {
+    z-index: 20;
+    background: #3b82f6;
+  }
+
+  .form-section {
+    display: none;
+    width: 100%;
+    
+  }
+
+  .form-section.active {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    border-radius: 10px;
+  }
+
+  .oneinput {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 6px;
+    border: none;
+  }
+
+  .addbutton {
+    margin-top: 1.35rem;
+    height: 2rem;
+    width: 6rem;
+    background: #3b82f6;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .multi-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+
+
+
+
+
+
+  .containerflighthotel{
+    position: absolute;
+    z-index: 20;
+    top: 65%;
+    left: 5%;
+  width: 88vw;
+  height: 30vh;
+  padding: 20px;
+  /*border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);*/
+}
+
+/* Tabs */
+.tabsflighthotel {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.tabsflighthotel button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.tabsflighthotel button.active {
+  color: #00d4ff;
+}
+
+/* Sliding highlight */
+.slider {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  width: 33.3%;
+  background: #00d4ff;
+  transition: 0.3s ease;
+}
+
+/* Forms */
+.form-sectionflighthotel {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: 0.4s ease;
+  position: absolute;
+  width: 100%;
+}
+body{
+  font-family: 'Inter', sans-serif;
+}
+
+.form-sectionflighthotel.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  position: relative;
+}
+
+/* Inputs */
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+/* Button */
+button.submit {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #00d4ff;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+button.submit:hover {
+  background: #00aacc;
+}
+.tabflighthotel{
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    color: white;
+    opacity: 8;
+}
+.scrolup{
+  background: #f5f7fb;
+  height: 390vh;
+  width: 100%;
+}
+
+
+/*.track {
+  animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}*/
+
+
+
+.travelsupport{
+  font-size: 0.8rem;
+  width: 100%;
+  padding-top: 3.6rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  letter-spacing: 0.72rem;
+  font-weight: bold;
+}
+.slidefath{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  height: 15rem;
+}
+.planyour{
+  letter-spacing: 0.1rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  height: 9.2vh;
+  font-size: 1.7rem;
+}
+.findhelp{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 1rem;
+}
+.sliderr {
+  width: 91.5%;
+  overflow: hidden;
+  position: relative;
+}
+
+.trackk {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.6s ease;
+  cursor: grab;
+}
+
+.trackk.dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  min-width: 480px;
+  height: 180px;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+  flex-shrink: 0;
+
+  background-size: cover;
+  background-position: center;
+  transition: 0.5s ease;
+}
+
+.card:hover {
+}
+
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+}
+
+/* TEXT */
+.content {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 2;
+}
+
+/* BUTTONS */
+.prevv, .nextt {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+.perfectdestination{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+}
+.perfectupimg{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-evenly;
+}
+.perfectdownimg{
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-evenly;
+}
+.upimg1{
+  cursor: pointer;
+  background-image: linear-gradient(to top, rgba(0,0,0,0.3), transparent), url(../1st/img/eiffel.webp);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  width: 65vw;
+  border-radius: 1rem;
+  height: 50vh;
+  transition-duration: 0.8s;
+  
+   
+}
+.realimgup{
+  
+  width: 65vw;
+  border-radius: 1rem;
+  height: 50vh;
+  overflow: hidden;
+
+}
+.upimg1:hover{
+  transition-duration: 0.9s;
+  transform: scale(1.1);
+  background-image: linear-gradient(to top, rgba(0,0,0,0.7), transparent), url(../1st/img/eiffel.webp);
+  
+
+}
+.upimg2{
+  cursor: pointer;
+  background-image: linear-gradient(to top, rgba(0,0,0,0.3), transparent), url(../1st/img/vietnam.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 19rem;
+  height: 19rem;
+  border-radius: 50rem;
+}
+.downimg1{
+  cursor: pointer;
+  background-image: linear-gradient(to top, rgba(0,0,0,0.3), transparent), url(../1st/img/pisa.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  width: 30vw;
+  border-radius: 1rem;
+}
+.downimg2{
+  cursor: pointer;
+  background-image: linear-gradient(to top, rgba(0,0,0,0.3), transparent), url(../1st/img/argentina.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 19rem;
+  height: 19rem;
+  border-radius: 50rem;
+}
+.downimg3{
+  cursor: pointer;
+  background-image: linear-gradient(to top, rgba(0,0,0,0.3), transparent), url(../1st/img/egypt.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  width: 30vw;
+  border-radius: 1rem;
+}
+.traveltomake{
+  
+  margin-bottom: 5rem;  
+  background-color: #d0dffc;
+  height: 70vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+
+}
+.traveltomake1{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  width: 70vw;
+}
+.traveltomake2{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  height: 50vh;
+}
+.travettomake1a{
+  font-weight: 450;
+  letter-spacing: 0.1rem;
+  text-align: left;
+  font-size: 1.6rem;
+ 
+}
+.travelbackgr{
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+  background-color: #f5f7fb;
+  width: 14vw;
+  height: 40vh;
+  border-radius: 6rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.travettomake1b{
+  border: 1px black solid;
+  height: 2rem;
+  width: 7rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-radius: 5rem;
+}
+.travelbackimg{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  height: 18vh;
+}
+.bookandrelax{
+  font-size: 1.2rem;
+  height: 5vh;
+}
+.travelimg{
+  height: 2rem;
+  width: 2re;
+}
+.bookandlist{
+  font-size: 0.96rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+}
+.bookandlist1{
+  width: 80%;
+}
+.travelbackimg1{
+  background-color: rgb(185, 185, 211);
+  height: 4.5rem;
+  border-radius: 5rem;
+  width: 4.5rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.travelbackimg2{
+  background-color: rgb(253, 206, 189);
+  height: 4.5rem;
+  border-radius: 5rem;
+  width: 4.5rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.travelbackimg3{
+  background-color: rgb(250, 223, 172);
+  height: 4.5rem;
+  border-radius: 5rem;
+  width: 4.5rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.travelbackimg4{
+  background-color: rgb(179, 253, 179);
+  height: 4.5rem;
+  border-radius: 5rem;
+  width: 4.5rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+ .navbar.scrolled {
+    background: rgba(10, 10, 10, 0.6); /* darker */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .parisfather{
+    height: 100%;
+  }
+  .paris{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+  .paris:hover{
+
+  }
+  .paris1{
+    color: rgb(255, 255, 255);
+    padding: 10px 24px;
+    border-radius: 5rem;
+    border:1px solid rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(10px);
+  }
+  .paris1a{
+    
+    
+  }
+  .paris1a:hover{
+
+  }
+  .divcardfther{
+    height: 100vh;
+     display: flex;
+     align-items: center;
+     text-align: center;
+     justify-content: center;
+  }
+  .divcardfther1{
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    height: 80vh;
+    width: 91vw;
+    background-color: white;
+    border-radius: 1rem;
+  }
+  .sliderb-container {
+  width: 90%;
+  max-width: 800px;
+  overflow: hidden;
+  position: relative;
+}
+
+.sliderb {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.cardb {
+  min-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.cardb-inner {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.buttonsb {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonsb button {
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "montserrat", sans-serif;
+}
+.top{
+    
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    border-radius:5px;
+    border:1px solid rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    color:white;
+    cursor:pointer;
+    transition:0.3s ease;
+    
+
+
+     position: relative;
+    overflow: hidden;
+}
+.navbar.scrolled {
+    background: rgba(10, 10, 10, 0.3); /* darker */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+.navbar {
+
+    background: transparent;
+    transition: all 0.4s ease;
+
+    z-index: 1000;
+  }
+.akipo{
+    text-align: left;
+}
+.sign{
+    color: black;
+}
+.signup{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    list-style-type: none;
+    width: 10vw;
+    height: 6vh;
+
+    
+
+}
+.img{
+     width: 100%;
+    height: 80vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.4)), url(../images/realplane2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.list{
+    list-style-type: none;
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+}
+.nav-links{
+     list-style-type: none;
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+
+}
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: lighter;
+}
+.prevv { left: -10px; }
+.nextt { right: -10px; }
+</style>
+</head>
+
+<body>
+
+<div class="hero" id="slider">
+     <div class="fixed-text">
+      <div class="navbar" id="navbar">
+         <div class="backgroundimage">
+        <div class="top" id="nav">
+          
+        <div class="akipo">
+            <div class="akipo1">Akipo Heritage</div>
+            <div class="akipo2">Int'l Travels & Tours</div>
+        </div>
+        <nav id="nav">
+            <div class="nav-blur" id="blur"></div>
+        <div class="list">
+            <div class="nav-links">
+            <li><a href="">Home</a></li>
+             <li><a href="">About</a></li>
+              <li><a href="">Contact Us</a></li>
+               <li><a href="akipohajjandumrah.html">Hajj & Umrah</a></li>
+                </div>
+        </div>
+    </nav>
+        <button class="btn"><span>Sign Up</span></button>
+    
+    </div></div>
+    </div></div>
+     <div class="fixed1a">
+        <div class="upfixed1a">
+            <div class="father">
+
+                <nav class="gnav" id="bestnav">
+                    <div class="gnav-blur" id="gblur"></div>
+                    <nav class="nav" id="navfather">
+                        <div class="indicator" id="indicator"></div>
+                        <img  id="img" class="icon" src="">
+                        
+                        <a class="active" data-icon="icons/realplane2-removebg-preview.png"><button class="tabflighthotel active" data-target="flight">Flights</button></a>
+                        <a data-icon="icons/realhotel.png"><button class="tabflighthotel" data-target="hotel">Hotels</button></a>
+                        <a data-icon="icons/realholiday-removebg-preview.png"><button class="tabflighthotel" data-target="holiday">Holiday</button></a>
+                        <a data-icon="icons/bookings-removebg-preview.png"><button class="tabflighthotel" data-target="bookings">Booking</button></a>
+                      
+                      </nav>
+                  
+
+              
+                </div>
+            
+        </div>
+     </div>
+    <div class="fixed1">
+        <div class="excluexpe">
+            <div class="exclu">Exclusive destination, personalized</div>
+            <div class="exper"> Experiences, unforgettable memories</div>
+        </div>
+        <div class="booknow"><div class="booknow1">Explore Packages</div></div>
+    </div>
+
+    <div class="containerflighthotel">
+    <div class="form-sectionflighthotel active" id="flight">
+    <div class="fixed1aa">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('one')">One Way</div>
+            <div class="tab" onclick="switchTab('round')">Round Trip</div>
+            <div class="tab" onclick="switchTab('multi')">Multi-City</div>
+          </div>
+          
+          <!-- ONE WAY -->
+          
+           <!--<input class="oneinput" placeholder="From">
+            <input class="oneinput" placeholder="To">
+            -->
+          
+          
+          <!-- ROUND TRIP -->
+         
+            <!--<input class="oneinput" placeholder="From">
+            <input class="oneinput" placeholder="To">
+            <input class="oneinput" type="date">
+            <input class="oneinput" type="date" placeholder="Return Date">
+        -->
+          
+          <!-- MULTI CITY -->
+         <!-- <div id="multi" class="form-section">
+            <div id="multi-container">
+              <div class="multi-row">
+                <input class="oneinput" placeholder="From">
+                <input class="oneinput" placeholder="To">
+                <input class="oneinput" type="date">
+              </div>
+            </div>
+          
+            <button class="addbutton" onclick="addFlight()">+ Add Flight</button>
+          </div>-->
+          
+          
+          
+    </div>
+    <div class="fixed2"><div  id="glassBox"  class="bottomblur">
+        <div id="one" class="form-section active">
+         <div class="glass-blur" id="glassBlur"></div>
+        <div  class="des">
+            <div class="des1">Destination</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Tokyo, Japan">
+  <option class="value" value="">Tokyo, Japan</option>
+  <option class="value" value="Emirate">Lagos, Nigeria</option>
+  <option class="value" value="Qatar">Dubail, U A E</option>
+  <option class="value" value="Turkish Airline">Qatar</option>
+</select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+  <option class="value" value="">Emirate</option>
+  <option class="value" value="Emirate">Emirate</option>
+  <option class="value" value="Qatar">Qatar</option>
+  <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <input class="travelinput" class="oneinput" type="date">
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+  <option class="value" value="">Choose An airline</option>
+  <option class="value" value="Emirate">Emirate</option>
+  <option class="value" value="Qatar">Qatar</option>
+  <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+            </div>
+        </div>
+        <button class="btn"><span>Search</span></button>
+    </div>
+
+ 
+    <div id="round" class="form-section">
+        <div class="glass-blur" id="glassBlur"></div>
+       <div  class="des">
+           <div class="des1">Destination</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="Tokyo, Japan">
+ <option class="value" value="">Tokyo, Japan</option>
+ <option class="value" value="Emirate">Lagos, Nigeria</option>
+ <option class="value" value="Qatar">Dubail, U A E</option>
+ <option class="value" value="Turkish Airline">Qatar</option>
+</select>
+           </div>
+       </div>
+       <div class="des">
+           <div class="des1">Select an airline</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="Emirate">
+ <option class="value" value="">Emirate</option>
+ <option class="value" value="Emirate">Emirate</option>
+ <option class="value" value="Qatar">Qatar</option>
+ <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+           </div>
+       </div>
+       <div class="des">
+           <div class="des1ii">Date</div>
+           <div class="date-container">
+ <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+ <span class="calendar-icon"></span>
+</div>
+       </div>
+       <div class="des">
+           <div class="des1">Travelers</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="chooseAnAirline">
+ <option class="value" value="">Choose An airline</option>
+ <option class="value" value="Emirate">Emirate</option>
+ <option class="value" value="Qatar">Qatar</option>
+ <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+           </div>
+       </div>
+       <button class="btn"><span>Search</span></button>
+   </div>  
+
+
+
+
+    
+
+
+
+
+
+  
+
+<div id="multi" class="form-section">
+    <div id="multi-container">
+      <div class="multi-row">
+         
+        <div class="glass-blur" id="glassBlur"></div>
+        <div  class="des">
+            <div class="des1">Destination</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Tokyo, Japan">
+     <option class="value" value="">Tokyo, Japan</option>
+     <option class="value" value="Emirate">Lagos, Nigeria</option>
+     <option class="value" value="Qatar">Dubail, U A E</option>
+     <option class="value" value="Turkish Airline">Qatar</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+     <option class="value" value="">Emirate</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <div class="date-container">
+     <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+     <span class="calendar-icon"></span>
+     </div>
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+     <option class="value" value="">Choose An airline</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <button class="addbutton" onclick="addFlight()">+ Add</button>
+        <button class="btn"><span>Search</span></button>
+     
+        
+      </div>
+    </div>
+  
+    
+  </div></div>
+</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="form-sectionflighthotel" id="hotel">
+    
+    <div class="fixed2"><div  id="glassBox"  class="bottomblur">
+        <div id="one" class="form-section active">
+         <div class="glass-blur" id="glassBlur"></div>
+        <div  class="des">
+            <div class="des1">City or Hotel</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Tokyo, Japan">
+  <option class="value" value="">Tokyo, Japan</option>
+  <option class="value" value="Emirate">Lagos, Nigeria</option>
+  <option class="value" value="Qatar">Dubail, U A E</option>
+  <option class="value" value="Turkish Airline">Qatar</option>
+</select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+  <option class="value" value="">Emirate</option>
+  <option class="value" value="Emirate">Emirate</option>
+  <option class="value" value="Qatar">Qatar</option>
+  <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <input class="travelinput" class="oneinput" type="date">
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+  <option class="value" value="">Choose An airline</option>
+  <option class="value" value="Emirate">Emirate</option>
+  <option class="value" value="Qatar">Qatar</option>
+  <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+            </div>
+        </div>
+        <button class="btn"><span>Search</span></button>
+    </div>
+
+ 
+    <div id="round" class="form-section">
+        <div class="glass-blur" id="glassBlur"></div>
+       <div  class="des">
+           <div class="des1">Destination</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="Tokyo, Japan">
+ <option class="value" value="">Tokyo, Japan</option>
+ <option class="value" value="Emirate">Lagos, Nigeria</option>
+ <option class="value" value="Qatar">Dubail, U A E</option>
+ <option class="value" value="Turkish Airline">Qatar</option>
+</select>
+           </div>
+       </div>
+       <div class="des">
+           <div class="des1">Select an airline</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="Emirate">
+ <option class="value" value="">Emirate</option>
+ <option class="value" value="Emirate">Emirate</option>
+ <option class="value" value="Qatar">Qatar</option>
+ <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+           </div>
+       </div>
+       <div class="des">
+           <div class="des1ii">Date</div>
+           <div class="date-container">
+ <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+ <span class="calendar-icon"></span>
+</div>
+       </div>
+       <div class="des">
+           <div class="des1">Travelers</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="chooseAnAirline">
+ <option class="value" value="">Choose An airline</option>
+ <option class="value" value="Emirate">Emirate</option>
+ <option class="value" value="Qatar">Qatar</option>
+ <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+           </div>
+       </div>
+       <button class="btn"><span>Search</span></button>
+   </div>  
+
+
+
+
+    
+
+
+
+
+
+  
+
+<div id="multi" class="form-section">
+    <div id="multi-container">
+      <div class="multi-row">
+         
+        <div class="glass-blur" id="glassBlur"></div>
+        <div  class="des">
+            <div class="des1">Destination</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Tokyo, Japan">
+     <option class="value" value="">Tokyo, Japan</option>
+     <option class="value" value="Emirate">Lagos, Nigeria</option>
+     <option class="value" value="Qatar">Dubail, U A E</option>
+     <option class="value" value="Turkish Airline">Qatar</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+     <option class="value" value="">Emirate</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <div class="date-container">
+     <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+     <span class="calendar-icon"></span>
+     </div>
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+     <option class="value" value="">Choose An airline</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <button class="addbutton" onclick="addFlight()">+ Add</button>
+        <button class="btn"><span>Search</span></button>
+     
+        
+      </div>
+    </div>
+  
+    
+  </div></div>
+</div></div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="form-sectionflighthotel" id="holiday">
+    <div class="fixed1aa">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('one')">One Way</div>
+            <div class="tab" onclick="switchTab('round')">Round Trip</div>
+            <div class="tab" onclick="switchTab('multi')">Multi-City</div>
+          </div>
+          
+          <!-- ONE WAY -->
+          
+           <!--<input class="oneinput" placeholder="From">
+            <input class="oneinput" placeholder="To">
+            -->
+          
+          
+          <!-- ROUND TRIP -->
+         
+            <!--<input class="oneinput" placeholder="From">
+            <input class="oneinput" placeholder="To">
+            <input class="oneinput" type="date">
+            <input class="oneinput" type="date" placeholder="Return Date">
+        -->
+          
+          <!-- MULTI CITY -->
+         <!-- <div id="multi" class="form-section">
+            <div id="multi-container">
+              <div class="multi-row">
+                <input class="oneinput" placeholder="From">
+                <input class="oneinput" placeholder="To">
+                <input class="oneinput" type="date">
+              </div>
+            </div>
+          
+            <button class="addbutton" onclick="addFlight()">+ Add Flight</button>
+          </div>-->
+          
+          
+          
+    </div>
+    <div class="fixed2"><div  id="glassBox"  class="bottomblur">
+        <div id="one" class="form-section active">
+         <div class="glass-blur" id="glassBlur"></div>
+        <div  class="des">
+            <div class="des1">Destination</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Tokyo, Japan">
+  <option class="value" value="">Tokyo, Japan</option>
+  <option class="value" value="Emirate">Lagos, Nigeria</option>
+  <option class="value" value="Qatar">Dubail, U A E</option>
+  <option class="value" value="Turkish Airline">Qatar</option>
+</select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+  <option class="value" value="">Emirate</option>
+  <option class="value" value="Emirate">Emirate</option>
+  <option class="value" value="Qatar">Qatar</option>
+  <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <input class="travelinput" class="oneinput" type="date">
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+  <option class="value" value="">Choose An airline</option>
+  <option class="value" value="Emirate">Emirate</option>
+  <option class="value" value="Qatar">Qatar</option>
+  <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+            </div>
+        </div>
+        <button class="btn"><span>Search</span></button>
+    </div>
+
+ 
+    <div id="round" class="form-section">
+        <div class="glass-blur" id="glassBlur"></div>
+       <div  class="des">
+           <div class="des1">Destination</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="Tokyo, Japan">
+ <option class="value" value="">Tokyo, Japan</option>
+ <option class="value" value="Emirate">Lagos, Nigeria</option>
+ <option class="value" value="Qatar">Dubail, U A E</option>
+ <option class="value" value="Turkish Airline">Qatar</option>
+</select>
+           </div>
+       </div>
+       <div class="des">
+           <div class="des1">Select an airline</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="Emirate">
+ <option class="value" value="">Emirate</option>
+ <option class="value" value="Emirate">Emirate</option>
+ <option class="value" value="Qatar">Qatar</option>
+ <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+           </div>
+       </div>
+       <div class="des">
+           <div class="des1ii">Date</div>
+           <div class="date-container">
+ <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+ <span class="calendar-icon"></span>
+</div>
+       </div>
+       <div class="des">
+           <div class="des1">Travelers</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="chooseAnAirline">
+ <option class="value" value="">Choose An airline</option>
+ <option class="value" value="Emirate">Emirate</option>
+ <option class="value" value="Qatar">Qatar</option>
+ <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+           </div>
+       </div>
+       <button class="btn"><span>Search</span></button>
+   </div>  
+
+
+
+
+    
+
+
+
+
+
+  
+
+<div id="multi" class="form-section">
+    <div id="multi-container">
+      <div class="multi-row">
+         
+        <div class="glass-blur" id="glassBlur"></div>
+        <div  class="des">
+            <div class="des1">Destination</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Tokyo, Japan">
+     <option class="value" value="">Tokyo, Japan</option>
+     <option class="value" value="Emirate">Lagos, Nigeria</option>
+     <option class="value" value="Qatar">Dubail, U A E</option>
+     <option class="value" value="Turkish Airline">Qatar</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+     <option class="value" value="">Emirate</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <div class="date-container">
+     <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+     <span class="calendar-icon"></span>
+     </div>
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+     <option class="value" value="">Choose An airline</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <button class="addbutton" onclick="addFlight()">+ Add</button>
+        <button class="btn"><span>Search</span></button>
+     
+        
+      </div>
+    </div>
+  
+    </div>
+  </div></div>
+</div>
+
+
+
+
+<div class="form-sectionflighthotel" id="tours">
+    <div class="fixed1aa">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('one')">One Way</div>
+            <div class="tab" onclick="switchTab('round')">Round Trip</div>
+            <div class="tab" onclick="switchTab('multi')">Multi-City</div>
+          </div>
+          
+          <!-- ONE WAY -->
+          
+           <!--<input class="oneinput" placeholder="From">
+            <input class="oneinput" placeholder="To">
+            -->
+          
+          
+          <!-- ROUND TRIP -->
+         
+            <!--<input class="oneinput" placeholder="From">
+            <input class="oneinput" placeholder="To">
+            <input class="oneinput" type="date">
+            <input class="oneinput" type="date" placeholder="Return Date">
+        -->
+          
+          <!-- MULTI CITY -->
+         <!-- <div id="multi" class="form-section">
+            <div id="multi-container">
+              <div class="multi-row">
+                <input class="oneinput" placeholder="From">
+                <input class="oneinput" placeholder="To">
+                <input class="oneinput" type="date">
+              </div>
+            </div>
+          
+            <button class="addbutton" onclick="addFlight()">+ Add Flight</button>
+          </div>-->
+          
+          
+          
+    </div>
+    <div class="fixed2"><div  id="glassBox"  class="bottomblur">
+        <div id="one" class="form-section active">
+         <div class="glass-blur" id="glassBlur"></div>
+        <div  class="des">
+            <div class="des1">Destination</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Tokyo, Japan">
+  <option class="value" value="">Tokyo, Japan</option>
+  <option class="value" value="Emirate">Lagos, Nigeria</option>
+  <option class="value" value="Qatar">Dubail, U A E</option>
+  <option class="value" value="Turkish Airline">Qatar</option>
+</select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+  <option class="value" value="">Emirate</option>
+  <option class="value" value="Emirate">Emirate</option>
+  <option class="value" value="Qatar">Qatar</option>
+  <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <input class="travelinput" class="oneinput" type="date">
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+  <option class="value" value="">Choose An airline</option>
+  <option class="value" value="Emirate">Emirate</option>
+  <option class="value" value="Qatar">Qatar</option>
+  <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+            </div>
+        </div>
+        <button class="btn"><span>Search</span></button>
+    </div>
+
+ 
+    <div id="round" class="form-section">
+        <div class="glass-blur" id="glassBlur"></div>
+       <div  class="des">
+           <div class="des1">Destination</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="Tokyo, Japan">
+ <option class="value" value="">Tokyo, Japan</option>
+ <option class="value" value="Emirate">Lagos, Nigeria</option>
+ <option class="value" value="Qatar">Dubail, U A E</option>
+ <option class="value" value="Turkish Airline">Qatar</option>
+</select>
+           </div>
+       </div>
+       <div class="des">
+           <div class="des1">Select an airline</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="Emirate">
+ <option class="value" value="">Emirate</option>
+ <option class="value" value="Emirate">Emirate</option>
+ <option class="value" value="Qatar">Qatar</option>
+ <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+           </div>
+       </div>
+       <div class="des">
+           <div class="des1ii">Date</div>
+           <div class="date-container">
+ <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+ <span class="calendar-icon"></span>
+</div>
+       </div>
+       <div class="des">
+           <div class="des1">Travelers</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="chooseAnAirline">
+ <option class="value" value="">Choose An airline</option>
+ <option class="value" value="Emirate">Emirate</option>
+ <option class="value" value="Qatar">Qatar</option>
+ <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+           </div>
+       </div>
+       <button class="btn"><span>Search</span></button>
+   </div>  
+
+
+
+
+    
+
+
+
+
+
+  
+
+<div id="multi" class="form-section">
+    <div id="multi-container">
+      <div class="multi-row">
+         
+        <div class="glass-blur" id="glassBlur"></div>
+        <div  class="des">
+            <div class="des1">Destination</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Tokyo, Japan">
+     <option class="value" value="">Tokyo, Japan</option>
+     <option class="value" value="Emirate">Lagos, Nigeria</option>
+     <option class="value" value="Qatar">Dubail, U A E</option>
+     <option class="value" value="Turkish Airline">Qatar</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+     <option class="value" value="">Emirate</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <div class="date-container">
+     <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+     <span class="calendar-icon"></span>
+     </div>
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+     <option class="value" value="">Choose An airline</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <button class="addbutton" onclick="addFlight()">+ Add</button>
+        <button class="btn"><span>Search</span></button>
+     
+        
+      </div>
+    </div>
+  
+    </div>
+  </div></div>
+</div>
+
+
+
+
+<div class="form-sectionflighthotel" id="bookings">
+    <div class="fixed1aa">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('one')">One Way</div>
+            <div class="tab" onclick="switchTab('round')">Round Trip</div>
+            <div class="tab" onclick="switchTab('multi')">Multi-City</div>
+          </div>
+          
+          <!-- ONE WAY -->
+          
+           <!--<input class="oneinput" placeholder="From">
+            <input class="oneinput" placeholder="To">
+            -->
+          
+          
+          <!-- ROUND TRIP -->
+         
+            <!--<input class="oneinput" placeholder="From">
+            <input class="oneinput" placeholder="To">
+            <input class="oneinput" type="date">
+            <input class="oneinput" type="date" placeholder="Return Date">
+        -->
+          
+          <!-- MULTI CITY -->
+         <!-- <div id="multi" class="form-section">
+            <div id="multi-container">
+              <div class="multi-row">
+                <input class="oneinput" placeholder="From">
+                <input class="oneinput" placeholder="To">
+                <input class="oneinput" type="date">
+              </div>
+            </div>
+          
+            <button class="addbutton" onclick="addFlight()">+ Add Flight</button>
+          </div>-->
+          
+          
+          
+    </div>
+    <div class="fixed2"><div  id="glassBox"  class="bottomblur">
+        <div id="one" class="form-section active">
+         <div class="glass-blur" id="glassBlur"></div>
+        <div  class="des">
+            <div class="des1">Destination</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Tokyo, Japan">
+  <option class="value" value="">Tokyo, Japan</option>
+  <option class="value" value="Emirate">Lagos, Nigeria</option>
+  <option class="value" value="Qatar">Dubail, U A E</option>
+  <option class="value" value="Turkish Airline">Qatar</option>
+</select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+  <option class="value" value="">Emirate</option>
+  <option class="value" value="Emirate">Emirate</option>
+  <option class="value" value="Qatar">Qatar</option>
+  <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <input class="travelinput" class="oneinput" type="date">
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+  <option class="value" value="">Choose An airline</option>
+  <option class="value" value="Emirate">Emirate</option>
+  <option class="value" value="Qatar">Qatar</option>
+  <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+            </div>
+        </div>
+        <button class="btn"><span>Search</span></button>
+    </div>
+
+ 
+    <div id="round" class="form-section">
+        <div class="glass-blur" id="glassBlur"></div>
+       <div  class="des">
+           <div class="des1">Destination</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="Tokyo, Japan">
+ <option class="value" value="">Tokyo, Japan</option>
+ <option class="value" value="Emirate">Lagos, Nigeria</option>
+ <option class="value" value="Qatar">Dubail, U A E</option>
+ <option class="value" value="Turkish Airline">Qatar</option>
+</select>
+           </div>
+       </div>
+       <div class="des">
+           <div class="des1">Select an airline</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="Emirate">
+ <option class="value" value="">Emirate</option>
+ <option class="value" value="Emirate">Emirate</option>
+ <option class="value" value="Qatar">Qatar</option>
+ <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+           </div>
+       </div>
+       <div class="des">
+           <div class="des1ii">Date</div>
+           <div class="date-container">
+ <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+ <span class="calendar-icon"></span>
+</div>
+       </div>
+       <div class="des">
+           <div class="des1">Travelers</div>
+           <div class="selectdes1">
+               <select class="travelinput" id="chooseAnAirline">
+ <option class="value" value="">Choose An airline</option>
+ <option class="value" value="Emirate">Emirate</option>
+ <option class="value" value="Qatar">Qatar</option>
+ <option class="value" value="Turkish Airline">Turkish Airline</option>
+</select>
+           </div>
+       </div>
+       <button class="btn"><span>Search</span></button>
+   </div>  
+
+
+
+
+    
+
+
+
+
+
+  
+
+<div id="multi" class="form-section">
+    <div id="multi-container">
+      <div class="multi-row">
+         
+        <div class="glass-blur" id="glassBlur"></div>
+        <div  class="des">
+            <div class="des1">Destination</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Tokyo, Japan">
+     <option class="value" value="">Tokyo, Japan</option>
+     <option class="value" value="Emirate">Lagos, Nigeria</option>
+     <option class="value" value="Qatar">Dubail, U A E</option>
+     <option class="value" value="Turkish Airline">Qatar</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+     <option class="value" value="">Emirate</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <div class="date-container">
+     <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+     <span class="calendar-icon"></span>
+     </div>
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+     <option class="value" value="">Choose An airline</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <button class="addbutton" onclick="addFlight()">+ Add</button>
+        <button class="btn"><span>Search</span></button>
+     
+        
+      </div>
+    </div>
+  
+    </div>
+  </div></div>
+</div>
+
+
+
+</div>
+    <!-- SLIDES -->
+    <div class="slide active" style="background-image: url('img/hawaii1.jpg')"></div>
+
+    <div class="slide" style="background-image:url('img/eiffel.webp')"></div>
+    <div class="slide" style="background-image:url('img/dubai2.jpg')"></div>
+    <div class="slide" style="background-image:url('img/pyra3.jpg')"></div>
+    <div class="slide" style="background-image:url('img/zomba.jpeg')"></div>
+
+    <!-- TEXT -->
+    <div class="text active">Explore the World</div>
+    <div class="text">Discover New Places</div>
+    <div class="text">Travel Without Limits</div>
+    <div class="text">Explore Luxury</div>
+    <div class="text">Travel Witut Lits</div>
+    <div class="text">Tral Witut Lits</div>
+
+    <!-- TYPEWRITER -->
+    <div class="typewriter" id="typeText"></div>
+
+    <!-- BUTTONS -->
+    <button class="nav-btn prev" onclick="prevSlide()">❮</button>
+    <button class="nav-btn next" onclick="nextSlide()">❯</button>
+
+    <!-- DOTS -->
+    <div class="dots" id="dots"></div>
+
+</div>
+<div class="scrolup">   
+   <div class="travelsupport">TRAVEL SUPPORT </div>
+   <div class="planyour">Plan your travel with confidence</div>
+   <div class="findhelp">Find help with your bookings  and travel plans, and see what to expect along your journey</div>
+    <div class="slidefath">
+   <div class="sliderr" id="sliderr">
+    <button class="prevv" onclick="prevSlidee()">←</button>
+  
+    <div class="trackk" id="trackk">
+  
+      <!-- ORIGINAL -->
+      <a href="details.html?place=paris" class="card" style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34');">
+        <div class="overlay"></div>
+        <div class="content"><h3>Paris 🇫🇷</h3></div>
+      </a>
+  
+      <a href="details.html?place=dubai" class="card" style="background-image:url('https://images.unsplash.com/photo-1508057198894-247b23fe5ade');">
+        <div class="overlay"></div>
+        <div class="content"><h3>Dubai 🇦🇪</h3></div>
+      </a>
+  
+      <a href="details.html?place=maldives" class="card" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');">
+        <div class="overlay"></div>
+        <div class="content"><h3>Maldives 🌊</h3></div>
+      </a>
+  
+      <a href="details.html?place=london" class="card" style="background-image:url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad');">
+        <div class="overlay"></div>
+        <div class="content"><h3>London 🇬🇧</h3></div>
+      </a>
+  
+      <!-- CLONES -->
+      <a href="#" class="card" style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34');"></a>
+      <a href="#" class="card" style="background-image:url('https://images.unsplash.com/photo-1508057198894-247b23fe5ade');"></a>
+      <a href="#" class="card" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');"></a>
+      <a href="#" class="card" style="background-image:url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad');"></a>
+  
+    </div>
+  
+    <button class="nextt" onclick="nextSlidee()">→</button>
+  </div></div>
+  <div class="traveltomake">
+    <div class="traveltomakee">
+    <div class="traveltomake1">
+      <div class="travettomake1a">Travel to make memories <br> all around the World</div>
+      <div class="travettomake1b">Book</div>
+    </div>
+    <div class="traveltomake2">
+      <div class="travelbackgr">
+        <div class="travelbackgr1">
+        <div class="travelbackimg"><div class="travelbackimg1"><img class="travelimg" src="../1st/img/bookings-removebg-preview.png" alt=""></div> </div>
+        <div class="bookandrelax">Book & relax</div>
+        <div class="bookandlist"><div class="bookandlist1">Book tody and know u are in safe hands</div></div>
+      </div></div>
+      <div class="travelbackgr">
+        <div class="travelbackgr1">
+        <div class="travelbackimg"><div class="travelbackimg2"><img class="travelimg" src="../1st/img/check-removebg-preview.png" alt=""></div> </div>
+        <div class="bookandrelax">Smart checklist</div>
+        <div class="bookandlist"><div class="bookandlist1">With our integrated system guides you through your entire journey.</div></div>
+      </div></div>
+      <div class="travelbackgr">
+        <div class="travelbackgr1">
+        <div class="travelbackimg"><div class="travelbackimg3"><img class="travelimg" src="../1st/img/savemore-removebg-preview.png" alt=""></div> </div>
+        <div class="bookandrelax">Save more</div>
+        <div class="bookandlist"><div class="bookandlist1">We give you the best price with every journey you take with us.</div></div>
+      </div></div>
+      <div class="travelbackgr">
+        <div class="travelbackgr1">
+        <div class="travelbackimg"><div class="travelbackimg4"><img class="travelimg" src="../1st/img/bookings-removebg-preview.png" alt=""></div> </div>
+        <div class="bookandrelax">bookings</div>
+        <div class="bookandlist"><div class="bookandlist1">With our system we give the best booking Experience</div></div>
+      </div></div>
+    </div>
+  </div></div>
+    <div class="perfectdestination"></div>
+    <div class="perfectupimg">
+      <div class="realimgup"><div class="upimg1"><div class="parisfather"><div class="paris"><div class="paris1">PARIS</div></div><div class="paris1a">paris is the  best place to be right now u sshould now this before it to late</div></div></div></div>
+      <div class="upimg2"><div class="paris"><div class="paris1">MOROCCO</div></div></div>
+    </div>
+    <div class="perfectdownimg">
+      <div class="downimg1"><div class="paris"><div class="paris1">COLUMBIA</div></div></div>
+      <div class="downimg2"><div class="paris"><div class="paris1">ARGENTINA</div></div></div>
+      <div class="downimg3"><div class="paris"><div class="paris1">EGYPT</div></div></div>
+
+    </div>
+    <div class="divcardfther">
+      <div class="divcardfther1"><div class="sliderb-container">
+        <div class="sliderb" id="sliderb">
+      
+          <!-- Clone LAST -->
+          <div class="cardb"><div class="cardb-inner">Card 3</div></div>
+      
+          <!-- Real Cards -->
+          <div class="cardb"><div class="cardb-inner">Card 1</div></div>
+          <div class="cardb"><div class="cardb-inner">Card 2</div></div>
+          <div class="cardb"><div class="cardb-inner">Card 3</div></div>
+      
+          <!-- Clone FIRST -->
+          <div class="cardb"><div class="cardb-inner">Card 1</div></div>
+      
+        </div>
+      
+        <div class="buttonsb">
+          <button onclick="prevb()">❮</button>
+          <button onclick="nextb()">❯</button>
+        </div>
+      </div></div>
+    
+    </div>
+</div>
+
+
+
+
+
+<script>
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
+
+
+
+
+const tabsflighthotel = document.querySelectorAll(".tabflighthotel");
+const forms = document.querySelectorAll(".form-sectionflighthotel");
+const sliderflighthotel = document.querySelector(".sliderflighthotel");
+
+tabsflighthotel.forEach((tabflighthotel, index) => {
+  tabflighthotel.addEventListener("click", () => {
+
+    // Remove active states
+    tabsflighthotel.forEach(t => t.classList.remove("active"));
+    forms.forEach(f => f.classList.remove("active"));
+
+    // Activate clicked tab
+    tabflighthotel.classList.add("active");
+    document.getElementById(tabflighthotel.dataset.target).classList.add("active");
+
+    // Move slider
+    sliderflighthotel.style.left = index * 33.3 + "%";
+  });
+});
+
+
+
+
+const sliderb = document.getElementById("sliderb");
+const cards = document.querySelectorAll(".cardb");
+
+let indexb = 1;
+const size = cards[0].clientWidth;
+
+// Start at first real card
+sliderb.style.transform = `translateX(-${size * indexb}px)`;
+
+// NEXT
+function nextb() {
+  if (indexb >= cards.length - 1) return;
+  indexb++;
+  sliderb.style.transition = "0.5s";
+  sliderb.style.transform = `translateX(-${size * indexb}px)`;
+}
+
+// PREV
+function prevb() {
+  if (indexb <= 0) return;
+  indexb--;
+  sliderb.style.transition = "0.5s";
+  sliderb.style.transform = `translateX(-${size * indexb}px)`;
+}
+
+// RESET WITHOUT ANIMATION
+sliderb.addEventListener("transitionend", () => {
+  if (cards[indexb].innerText === "Card 1") {
+    sliderb.style.transition = "none";
+    indexb = 1;
+    sliderb.style.transform = `translateX(-${size * indexb}px)`;
+  }
+
+  if (cards[indexb].innerText === "Card 3") {
+    sliderb.style.transition = "none";
+    indexb = cards.length - 2;
+    sliderb.style.transform = `translateX(-${size * indexb}px)`;
+  }
+});
+
+
+
+
+
+
+
+const navfather = document.getElementById("navfather");
+    const indicator = document.getElementById("indicator");
+    const img = document.getElementById("img");
+    const items = navfather.querySelectorAll("a");
+    
+    function moveIndicator(el) {
+      const rect = el.getBoundingClientRect();
+      const navRect = navfather.getBoundingClientRect();
+    
+      const padding = 30;
+    
+      const left = rect.left - navRect.left - padding/2;
+      const width = rect.width + padding;
+    
+      indicator.style.left = left + "px";
+      indicator.style.width = width + "px";
+    
+      // move icon
+      img.style.left = (left + width/2 - 32.5) + "px";
+    
+      // change icon smoothly
+      img.style.opacity = 0;
+      setTimeout(() => {
+        img.src = el.dataset.icon;
+        img.style.opacity = 1;
+      }, 150);
+    }
+    
+    // default
+    moveIndicator(document.querySelector(".active"));
+    
+    items.forEach(item => {
+      item.addEventListener("click", () => {
+        document.querySelector(".active").classList.remove("active");
+        item.classList.add("active");
+        moveIndicator(item);
+      });
+    });</script>
+
+
+
+<script>
+    function switchTab(type) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.form-section').forEach(f => f.classList.remove('active'));
+
+    event.target.classList.add('active');
+    document.getElementById(type).classList.add('active');
+  }
+
+  function addFlight() {
+    const container = document.getElementById("multi-container");
+
+    const row = document.createElement("div");
+    row.className = "multi-row";
+
+    row.innerHTML = `
+        <select class="travelinput" id="Tokyo, Japan">
+     <option class="value" value="">Tokyo, Japan</option>
+     <option class="value" value="Emirate">Lagos, Nigeria</option>
+     <option class="value" value="Qatar">Dubail, U A E</option>
+     <option class="value" value="Turkish Airline">Qatar</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1">Select an airline</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="Emirate">
+     <option class="value" value="">Emirate</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+            </div>
+        </div>
+        <div class="des">
+            <div class="des1ii">Date</div>
+            <div class="date-container">
+     <input type="text" id="datePicker" class="date-input" placeholder="Departure – Return Date">
+     <span class="calendar-icon"></span>
+     </div>
+        </div>
+        <div class="des">
+            <div class="des1">Travelers</div>
+            <div class="selectdes1">
+                <select class="travelinput" id="chooseAnAirline">
+     <option class="value" value="">Choose An airline</option>
+     <option class="value" value="Emirate">Emirate</option>
+     <option class="value" value="Qatar">Qatar</option>
+     <option class="value" value="Turkish Airline">Turkish Airline</option>
+     </select>
+    `;
+
+    container.appendChild(row);
+  }
+
+
+
+
+
+
+const bestnav = document.getElementById("bestnav");
+  const gblur = document.getElementById("gblur");
+
+  bestnav.addEventListener("mouseenter", () => {
+    gblur.style.opacity = "1";
+  });
+
+  bestnav.addEventListener("mouseleave", () => {
+    gblur.style.opacity = "0";
+  });
+
+  bestnav.addEventListener("mousemove", (e) => {
+    const rect = bestnav.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    gblur.style.maskImage = `radial-gradient(circle 50px at ${x}px ${y}px, white 0%, transparent 100%)`;
+    gblur.style.webkitMaskImage = `radial-gradient(circle 50px at ${x}px ${y}px, white 0%, transparent 100%)`;
+  });
+  let indexx = 0;
+const trackk = document.getElementById("trackk");
+const sliderr = document.getElementById("sliderr");
+const cardWidth = 500;
+const total = 4;
+
+// BUTTONS
+function nextSlidee() { indexx++; slidee(); }
+function prevSlidee() { indexx--; slidee(); }
+
+function slidee() {
+  trackk.style.transition = "transform 0.6s ease";
+  trackk.style.transform = `translateX(-${indexx * cardWidth}px)`;
+
+  if (indexx >= total) {
+    setTimeout(() => {
+      trackk.style.transition = "none";
+      indexx = 0;
+      trackk.style.transform = `translateX(0)`;
+    }, 600);
+  }
+
+  if (indexx < 0) {
+    trackk.style.transition = "none";
+    indexx = total - 1;
+    trackk.style.transform = `translateX(-${indexx * cardWidth}px)`;
+  }
+}
+
+// AUTO
+let auto = setInterval(nextSlidee, 3000);
+
+// PAUSE ON HOVER
+sliderr.addEventListener("mouseenter", () => clearInterval(auto));
+sliderr.addEventListener("mouseleave", () => {
+  auto = setInterval(nextSlidee, 3000);
+});
+
+// 🔥 DRAG / SWIPE
+let isDragging = false;
+let startXx = 0;
+let currentTranslate = 0;
+
+trackk.addEventListener("mousedown", startDrag);
+trackk.addEventListener("touchstart", startDrag);
+
+trackk.addEventListener("mousemove", drag);
+trackk.addEventListener("touchmove", drag);
+
+trackk.addEventListener("mouseup", endDrag);
+trackk.addEventListener("mouseleave", endDrag);
+trackk.addEventListener("touchend", endDrag);
+
+function startDrag(e) {
+  isDragging = true;
+  startXx = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
+  trackk.classList.add("dragging");
+}
+
+function drag(e) {
+  if (!isDragging) return;
+  const x = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
+  const walk = x - startXx;
+
+  trackk.style.transform = `translateX(${ -indexx * cardWidth + walk }px)`;
+}
+
+function endDrag(e) {
+  if (!isDragging) return;
+  isDragging = false;
+  trackk.classList.remove("dragging");
+
+  const endX = e.type.includes("mouse") ? e.pageX : e.changedTouches[0].clientX;
+  const diff = endX - startXx;
+
+  if (diff < -50) nextSlidee();
+  else if (diff > 50) prevSlidee();
+  else slidee();
+}
+
+
+
+
+
+
+
+
+
+flatpickr("#datePicker", {
+  mode: "range",
+  minDate: "today",
+  dateFormat: "Y-m-d",
+  animate: true
+});
+</script>
+
+<script>
+  function setupGlassEffect(container, blurEl, size = 100) {
+    container.addEventListener("mouseenter", () => {
+      blurEl.style.opacity = "1";
+    });
+
+    container.addEventListener("mouseleave", () => {
+      blurEl.style.opacity = "0";
+    });
+
+    container.addEventListener("mousemove", (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      blurEl.style.maskImage = `radial-gradient(circle ${size}px at ${x}px ${y}px, white 0%, transparent 100%)`;
+      blurEl.style.webkitMaskImage = `radial-gradient(circle ${size}px at ${x}px ${y}px, white 0%, transparent 100%)`;
+    });
+  
+}
+
+setupGlassEffect(
+    document.getElementById("glassBox"),
+    document.getElementById("glassBlur"),
+    120
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const slides = document.querySelectorAll('.slide');
+const texts = document.querySelectorAll('.text');
+const dotsContainer = document.getElementById("dots");
+
+const typeTexts = [
+    "Book your dream trip today...",
+    "Affordable packages available...",
+    "Your journey starts here...",
+    "Travel like never before..."
+];
+
+let index = 0;
+let charIndex = 0;
+
+const typeElement = document.getElementById("typeText");
+
+/* CREATE DOTS */
+slides.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.classList.add("dot");
+    if(i === 0) dot.classList.add("active");
+
+    dot.addEventListener("click", () => {
+        goToSlide(i);
+    });
+
+    dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll(".dot");
+
+/* TYPEWRITER */
+function typeWriter(){
+    if(charIndex < typeTexts[index].length){
+        typeElement.textContent += typeTexts[index].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 40);
+    }
+}
+
+function resetType(){
+    typeElement.textContent = "";
+    charIndex = 0;
+    typeWriter();
+}
+
+/* CHANGE SLIDE */
+function goToSlide(i){
+    slides[index].classList.remove('active');
+    texts[index].classList.remove('active');
+    dots[index].classList.remove('active');
+
+    index = i;
+
+    slides[index].classList.add('active');
+    texts[index].classList.add('active');
+    dots[index].classList.add('active');
+
+    resetType();
+}
+
+function nextSlide(){
+    goToSlide((index + 1) % slides.length);
+}
+
+function prevSlide(){
+    goToSlide((index - 1 + slides.length) % slides.length);
+}
+
+/* AUTO */
+setInterval(nextSlide, 6000);
+
+/* SWIPE */
+let startX = 0;
+const slider = document.getElementById("slider");
+
+slider.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+slider.addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+
+    if(startX - endX > 50){
+        nextSlide();
+    } else if(endX - startX > 50){
+        prevSlide();
+    }
+});
+
+/* INIT */
+typeWriter();
+
+
+
+
+
+
+
+
+
+  const nav = document.getElementById("nav");
+  const blur = document.getElementById("blur");
+
+  nav.addEventListener("mouseenter", () => {
+    blur.style.opacity = "1";
+  });
+
+  nav.addEventListener("mouseleave", () => {
+    blur.style.opacity = "0";
+  });
+
+  nav.addEventListener("mousemove", (e) => {
+    const rect = nav.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    blur.style.maskImage = `radial-gradient(circle 120px at ${x}px ${y}px, white 0%, transparent 100%)`;
+    blur.style.webkitMaskImage = `radial-gradient(circle 120px at ${x}px ${y}px, white 0%, transparent 100%)`;
+  });
+</script>
+</body>
+</html>
